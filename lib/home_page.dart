@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+  const MyHomePage({super.key, required this.title, required this.subtitle});
   final String title;
+  final String subtitle;
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
