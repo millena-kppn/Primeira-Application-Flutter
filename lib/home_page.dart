@@ -20,7 +20,16 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
+        title: Row(
+          children: [
+            Text(widget.title),
+            SizedBox(width: 8),
+            Text(
+              widget.subtitle,
+              style: TextStyle(fontSize: 16),
+            )
+          ]
+        )
       ),
       body: Center(
         child: Column(
