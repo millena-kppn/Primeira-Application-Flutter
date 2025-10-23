@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:primeira_application_flutter/widgets/subtitulo_widget.dart';
 
 
 class MyHomePage extends StatefulWidget {
@@ -24,10 +25,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             Text(widget.title),
             SizedBox(width: 8),
-            Text(
-              widget.subtitle,
-              style: TextStyle(fontSize: 16),
-            )
+           SubtituloWidget(label: widget.subtitle),
           ]
         )
       ),
