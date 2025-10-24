@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:primeira_application_flutter/widgets/subtitulo_widget.dart';
 
-
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title, required this.subtitle});
   final String title;
@@ -9,9 +8,8 @@ class MyHomePage extends StatefulWidget {
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
-class _MyHomePageState extends State<MyHomePage> {
 
-  
+class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,16 +19,20 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             Text(widget.title),
             SizedBox(width: 8),
-           SubtituloWidget(label: widget.subtitle),
-          ]
-        )
+            SubtituloWidget(label: widget.subtitle),
+          ],
+        ),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text('You have pushed the button this many times:'),
-          ],
+        child: ListView.builder(
+          itemCount: 1,
+          itemBuilder: (context, index) {
+            return ListTile(
+              leading: Icon(Icons.task),
+              title: Text("Tarefa 1"),
+              trailing: Icon(Icons.arrow_right_alt_outlined),
+            );
+          },
         ),
       ),
     );
