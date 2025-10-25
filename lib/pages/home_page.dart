@@ -27,10 +27,13 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Column(
         children: [
-          TextFormField(
-            decoration: InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: "Digite uma tarefa!",
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextFormField(
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: "Digite uma tarefa!",
+              ),
             ),
           ),
           Expanded(
