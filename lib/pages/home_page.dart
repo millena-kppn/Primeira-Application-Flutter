@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:primeira_application_flutter/widgets/subtitulo_widget.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -24,17 +25,27 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      body: Center(
-        child: ListView.builder(
-          itemCount: tarefas.length,
-          itemBuilder: (context, index) {
-            return ListTile(
-              leading: Icon(Icons.task),
-              title: Text("Tarefa 1"),
-              trailing: Icon(Icons.arrow_right_alt_outlined),
-            );
-          },
-        ),
+      body: Column(
+        children: [
+          TextFormField(
+            decoration: InputDecoration(
+              border: OutlineInputBorder(),
+              labelText: "Digite uma tarefa!",
+            ),
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: tarefas.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  leading: Icon(Icons.task),
+                  title: Text("${tarefas[index]}"),
+                  trailing: Icon(Icons.arrow_right_alt_outlined),
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
