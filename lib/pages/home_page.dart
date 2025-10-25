@@ -10,6 +10,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  List<String> tarefas = ['Tarefa 1', 'Tarefa 2', 'Tarefa 3'];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +26,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Center(
         child: ListView.builder(
-          itemCount: 1,
+          itemCount: tarefas.length,
           itemBuilder: (context, index) {
             return ListTile(
               leading: Icon(Icons.task),
