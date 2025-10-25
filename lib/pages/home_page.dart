@@ -50,6 +50,10 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
       ),
+      floatingActionButton: FloatingActionButton(
+      onPressed: _addicionarTarefa(),
+      child: Icon(Icons.add),
+      ),
     );
   }
 }
