@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:primeira_application_flutter/widgets/subtitulo_widget.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -12,6 +11,20 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   List<String> tarefas = ['Tarefa 1', 'Tarefa 2', 'Tarefa 3'];
+  var controller = TextEditingController();
+
+  @override
+  void initState() {
+    controller = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,6 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextFormField(
+              controller: controller, //add controlador
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: "Digite uma tarefa!",
@@ -51,9 +65,11 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-      onPressed: _addicionarTarefa(),
-      child: Icon(Icons.add),
+        onPressed: _addicionarTarefa,
+        child: Icon(Icons.add),
       ),
     );
   }
+
+  void _addicionarTarefa() {}
 }
