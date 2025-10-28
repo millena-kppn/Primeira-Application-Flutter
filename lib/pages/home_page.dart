@@ -71,5 +71,14 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  void _addicionarTarefa() {}
+  void _addicionarTarefa() {
+    var tarefaDigitada = controller.text;
+    if(tarefaDigitada.trim().isEmpty){
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Você precisa digitar uma tarefa")),
+      );
+      return;
+    }
+    tarefas.add(tarefaDigitada);
+  }
 }
