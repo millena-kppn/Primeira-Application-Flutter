@@ -1,27 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:primeira_application_flutter/models/tarefa_model.dart';
 import 'package:primeira_application_flutter/widgets/subtitulo_widget.dart';
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title, required this.subtitle});
+  const MyHomePage({super.key, required this.title, required this.subtitulo});
   final String title;
-  final String subtitle;
+  final String subtitulo;
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List<String> tarefas = ['Tarefa 1', 'Tarefa 2', 'Tarefa 3'];
-  var controller = TextEditingController();
+  List<Tarefa> tarefas = []; //ALTERAMOS AQUI
+
+  late TextEditingController controllerDescricao;  //ALTERAMOS
+  late TextEditingController controllerTitulo; //INCLUIMOS
 
   @override
-  void initState() {
-    controller = TextEditingController();
+  void initState(){
+    controllerDescricao = TextEditingController(); //INCLUIMOS
+    controllerTitulo = TextEditingController(); //INCLUIMOS
     super.initState();
   }
 
-  @override
-  void dispose() {
-    controller.dispose();
+    @override
+  void dispose(){
+    controllerDescricao.dispose();
+    controllerTitulo.dispose();
     super.dispose();
   }
 
@@ -34,7 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             Text(widget.title),
             SizedBox(width: 8),
-            SubtituloWidget(label: widget.subtitle),
+            SubtituloWidget(label: widget.subtitulo),
           ],
         ),
       ),
@@ -43,20 +48,32 @@ class _MyHomePageState extends State<MyHomePage> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextFormField(
-              controller: controller, //add controlador
+              controller: controllerTitulo,//INCLUIMOS
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: "Digite uma tarefa!",
               ),
             ),
           ),
+          Padding( //INCLUIMOS
+            padding: const EdgeInsets.all(8.0),
+            child: TextFormField(
+              controller: controllerDescricao,//INCLUIMOS
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: "Digite uma descrição para a tarefa!",
+              ),
+            ),
+          ),
+          
           Expanded(
             child: ListView.builder(
               itemCount: tarefas.length,
               itemBuilder: (context, index) {
                 return ListTile(
                   leading: Icon(Icons.task),
-                  title: Text("${tarefas[index]}"),
+                  title: Text(tarefas[index].descricao),
+                  subtitle: Text(tarefas[index].descricao),
                   trailing: Icon(Icons.arrow_right_alt_outlined),
                 );
               },
@@ -70,17 +87,29 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
+  void _addicionarTarefa(){
+    var tituloTarefa = controllerTitulo.text; //INCLUIMOS
+    var descricaoTarefa = controllerTitulo.text;//INCLUIMOS
 
-  void _addicionarTarefa() {
-    var tarefaDigitada = controller.text;
-    if (tarefaDigitada.trim().isEmpty) {
+    if(tituloTarefa.trim().isEmpty){
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Você precisa digitar uma tarefa")),
+        SnackBar (content: Text("Você precisa difgitar uma tarefa")),
       );
       return;
     }
+        if(descricaoTarefa.trim().isEmpty){
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar (content: Text("Você precisa difgitar uma tarefa")),
+      );
+      return;
+    }
+    var tarefa = Tarefa(descricao: descricaoTarefa, titulo: tituloTarefa); 
+
     setState(() {
-      tarefas.add(tarefaDigitada);
-    });
+          
+    tarefas.add(tarefa); //ALTERAMOS
+   }); 
+   controllerDescricao.clear();
+   controllerTitulo.clear();
   }
 }
