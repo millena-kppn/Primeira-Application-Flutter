@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:primeira_application_flutter/models/tarefa_model.dart';
 import 'package:primeira_application_flutter/widgets/subtitulo_widget.dart';
@@ -20,8 +21,21 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState(){
     controllerDescricao = TextEditingController(); //INCLUIMOS
     controllerTitulo = TextEditingController(); //INCLUIMOS
+    _getTarefas();
     super.initState();
   }
+
+  Future<void> _getTarefas() async{
+    var dio = Dio(
+      BaseOptions(
+        connectTimeout: Duration(seconds: 30),
+        baseUrl: 'https://6912665d52a60f10c8218a94.mockapi.io/api/v1',
+        ),
+    );
+    var response = await dio.get('/tarefa');
+    response.data;
+  }
+
 
     @override
   void dispose(){
