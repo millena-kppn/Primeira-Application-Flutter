@@ -17,6 +17,8 @@ class _MyHomePageState extends State<MyHomePage> {
   late TextEditingController controllerDescricao;  //ALTERAMOS
   late TextEditingController controllerTitulo; //INCLUIMOS
 
+ bool isLoading = true;
+
   @override
   void initState(){
     controllerDescricao = TextEditingController(); //INCLUIMOS
@@ -26,6 +28,9 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Future<void> _getTarefas() async{
+    setState(() {
+      isLoading = true;
+    });
     var dio = Dio(
       BaseOptions(
         connectTimeout: Duration(seconds: 30),
@@ -34,8 +39,18 @@ class _MyHomePageState extends State<MyHomePage> {
     );
     var response = await dio.get('/tarefa');
     response.data;
-  }
+    var listaData = response.data as List;
+    for(var data in listaData){
+      var tarefa = Tarefa(descricao: data ['descricao'],
+          titulo: data['titulo'],
+          );
+          tarefas.add(tarefa);
+    }
+    setState(() {
+      isLoading = false;
+    });
 
+  }
 
     @override
   void dispose(){
@@ -57,7 +72,9 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      body: Column(
+      body: 
+      isLoading ? Center(child: CircularProgressIndicator(),) :
+      Column(
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
