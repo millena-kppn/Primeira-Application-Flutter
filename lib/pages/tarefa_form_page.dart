@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 class TarefaFormPage extends StatefulWidget {
@@ -80,6 +81,18 @@ class _TarefaFormPageState extends State<TarefaFormPage> {
     var descricaoTarefa = controllerDescricao.text;
 
     if(formkey.currentState?.validate() == true){
+         var dio = Dio(
+      BaseOptions(
+        connectTimeout: Duration(seconds: 30),
+        baseUrl: 'https://6912665d52a60f10c8218a94.mockapi.io/api/v1',
+      ),
+    );
+    var response = await dio.post(
+      '/tarefa', data: {
+        'titulo': tituloTarefa,
+        'descricao': descricaoTarefa
+      },
+    );
     }
   }
 }
