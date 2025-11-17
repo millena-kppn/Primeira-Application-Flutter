@@ -88,11 +88,10 @@ class _TarefaFormPageState extends State<TarefaFormPage> {
       ),
     );
     var response = await dio.post(
-      '/tarefa', data: {
-        'titulo': tituloTarefa,
-        'descricao': descricaoTarefa
-      },
+      '/tarefa', 
+      data: {'titulo': tituloTarefa,'descricao': descricaoTarefa},
     );
+    if (!context.mounted) Navigator.pop(context);
     }
   }
 }
