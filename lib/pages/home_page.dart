@@ -90,7 +90,10 @@ class _MyHomePageState extends State<MyHomePage> {
           return TarefaFormPage();
         },
       ),
-    );
+    ).then((_){
+  tarefas.clear();
+  _getTarefas();
+    });
 
     // //   var tarefa = Tarefa(descricao: descricaoTarefa, titulo: tituloTarefa);
 
